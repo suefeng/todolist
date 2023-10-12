@@ -1,13 +1,21 @@
 type SelectTypes = {
-  labelText: string,
-  id: string,
-  name: string,
-  touched: object,
-  errors: object,
-  children: React.ReactNode,
-}
+  labelText: string;
+  id: string;
+  name: string;
+  touched: object;
+  errors: object;
+  children: React.ReactNode;
+};
 
-const Select = ({ labelText, id, name, touched, errors, children, ...props }: SelectTypes) => {
+const Select = ({
+  labelText,
+  id,
+  name,
+  touched,
+  errors,
+  children,
+  ...props
+}: SelectTypes) => {
   const hasErrors = touched && touched[name] && errors && errors[name];
 
   return (
@@ -28,6 +36,6 @@ const Select = ({ labelText, id, name, touched, errors, children, ...props }: Se
   );
 };
 
-Select.displayName = 'Select';
+Select.displayName = "Select";
 
 export default Select;

@@ -16,9 +16,9 @@ const AddTodo = ({ onTodoSave }: { onTodoSave: Function }) => {
       description: values.description,
       expiration: values.expiration,
     });
-    await createCategory({ category_id: values.categories, todo_id: todo.id });
+    await createCategory({ category_id: values.category, todo_id: todo.id });
     await createFrequency({ frequency_id: values.frequency, todo_id: todo.id });
-    await createDay({ day_id: values.days, todo_id: todo.id });
+    await createDay({ day_id: values.day, todo_id: todo.id });
     setTimeout(() => {
       onTodoSave();
     }, 1000);
@@ -27,9 +27,9 @@ const AddTodo = ({ onTodoSave }: { onTodoSave: Function }) => {
   const initialValues = {
     description: "",
     expiration: "",
-    categories: "",
+    category: "",
     frequency: "",
-    days: "",
+    day: "",
   };
 
   return (

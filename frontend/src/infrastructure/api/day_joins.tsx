@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 import http from "infrastructure/utilities/http";
-import { CategoryJoin } from "domain/entities/CategoryJoin";
+import { DayJoin } from "domain/entities/DayJoin";
 
-export const useCategoryJoinCreation = () =>
+export const useDayJoinCreation = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
-      const response = await http.post(`/api/v1/category_joins`, {
+    mutationFn: async (params: DayJoin) => {
+      const response = await http.post(`/api/v1/day_joins`, {
         body: JSON.stringify({ ...params }),
       });
       const result = await response.json();
@@ -16,15 +16,12 @@ export const useCategoryJoinCreation = () =>
     },
   });
 
-export const useCategoryJoinUpdate = () =>
+export const useDayJoinUpdate = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
-      const response = await http.put(
-        `/api/v1/category_joins/${params.todo_id}`,
-        {
-          body: JSON.stringify({ ...params }),
-        }
-      );
+    mutationFn: async (params: DayJoin) => {
+      const response = await http.put(`/api/v1/day_joins/${params.todo_id}`, {
+        body: JSON.stringify({ ...params }),
+      });
       const result = await response.json();
 
       if (response.ok) {
@@ -34,11 +31,11 @@ export const useCategoryJoinUpdate = () =>
     },
   });
 
-export const useCategoryJoinDelete = () =>
+export const useDayJoinDelete = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
+    mutationFn: async (params: DayJoin) => {
       const response = await http.delete(
-        `/api/v1/category_joins/${params.todo_id}`,
+        `/api/v1/day_joins/${params.todo_id}`,
         {
           body: JSON.stringify({ ...params }),
         }

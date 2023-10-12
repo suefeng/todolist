@@ -1,19 +1,28 @@
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery } from "react-query";
 import http from "infrastructure/utilities/http";
+import { Todo } from "domain/entities/Todo";
 
-export const useTodos = ({ filter = '', type = '' }: { filter?: string, type?: string }) => {
-  const filterParam = filter !== '' ? `?filter=${filter}&type=${type}` : ''
+export const useTodos = ({
+  filter = "",
+  type = "",
+}: {
+  filter?: string;
+  type?: string;
+}) => {
+  const filterParam = filter !== "" ? `?filter=${filter}&type=${type}` : "";
 
   return useQuery({
-    queryKey: ['todos', filter],
+    queryKey: ["todos", filter],
     queryFn: () =>
-      http.get(`/api/v1/todos${filterParam}`).then(response => response.json()),
-  })
+      http
+        .get(`/api/v1/todos${filterParam}`)
+        .then((response) => response.json()),
+  });
 };
 
 export const useTodosCreation = () =>
   useMutation({
-    mutationFn: async params => {
+    mutationFn: async (params: Todo) => {
       const response = await http.post(`/api/v1/todos`, {
         body: JSON.stringify({ ...params }),
       });
@@ -27,8 +36,8 @@ export const useTodosCreation = () =>
 
 export const useTodosUpdate = () =>
   useMutation({
-    mutationFn: async params => {
-      const response = await http.put(`/api/v1/todos/${params.todo_id}`, {
+    mutationFn: async (params: Todo) => {
+      const response = await http.put(`/api/v1/todos/${params.id}`, {
         body: JSON.stringify({ ...params }),
       });
       const result = await response.json();
@@ -42,17 +51,17 @@ export const useTodosUpdate = () =>
 
 export const useTodoShow = (todoId: string) => {
   return useQuery({
-    queryKey: ['todos', todoId],
+    queryKey: ["todos", todoId],
     queryFn: () =>
-      http.get(`/api/v1/todos/${todoId}`).then(response => response.json()),
-  })
+      http.get(`/api/v1/todos/${todoId}`).then((response) => response.json()),
+  });
 };
 
 export async function useTodosDestroy(todoId: string) {
   await http.delete(`/api/v1/todos/${todoId}`, {
-    mode: 'cors',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    referrer: 'no-referrer',
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    referrer: "no-referrer",
   });
 }

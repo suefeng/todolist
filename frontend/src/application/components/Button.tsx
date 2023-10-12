@@ -1,17 +1,36 @@
-import React from 'react'
-import MuiButton from '@mui/material/Button'
+import React from 'react';
 
-type Props = {
-  children: string,
-}
+type ButtonType = {
+  disabled?: boolean;
+  icon?: React.ReactNode;
+  id: string;
+  type?: 'button' | 'submit' | 'reset';
+  children: string;
+  classNames?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+};
 
-const Button = ({ children, ...props }: Props) => {
+export const Button = ({
+  children,
+  classNames,
+  disabled,
+  icon,
+  id,
+  type,
+  onClick,
+  ...props
+}: ButtonType) => {
   return (
-    <MuiButton
+    <button
       {...props}
-      className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-    >{children}</MuiButton>
-  )
-}
-
-export default Button;
+      className={`inline-flex items-center justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 ${classNames}`}
+      disabled={disabled}
+      id={id}
+      type={type}
+      onClick={onClick}
+    >
+      {icon}
+      {children}
+    </button>
+  );
+};

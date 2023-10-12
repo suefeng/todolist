@@ -1,20 +1,31 @@
-import React from 'react'
+import React from 'react';
 import MuiAccordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 
-const Accordion = ({ title, children, ...props }: { title: string, children: React.ReactNode }) => {
+type AccordionTypes = {
+  title: string;
+  children: React.ReactNode;
+  className?: string;
+};
+
+const Accordion = ({
+  title,
+  children,
+  className,
+  ...props
+}: AccordionTypes) => {
   return (
-    <MuiAccordion {...props}><AccordionSummary
-      aria-controls="panel1a-content"
-      id="panel1a-header"
-    >
-      {title}
-    </AccordionSummary>
-      <AccordionDetails>
-        {children}
-      </AccordionDetails></MuiAccordion>
-  )
-}
+    <MuiAccordion {...props}>
+      <AccordionSummary
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        {title}
+      </AccordionSummary>
+      <AccordionDetails>{children}</AccordionDetails>
+    </MuiAccordion>
+  );
+};
 
 export default Accordion;

@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 import http from "infrastructure/utilities/http";
-import { CategoryJoin } from "domain/entities/CategoryJoin";
+import { FrequencyJoin } from "domain/entities/FrequencyJoin";
 
-export const useCategoryJoinCreation = () =>
+export const useFrequencyJoinCreation = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
-      const response = await http.post(`/api/v1/category_joins`, {
+    mutationFn: async (params: FrequencyJoin) => {
+      const response = await http.post(`/api/v1/frequency_joins`, {
         body: JSON.stringify({ ...params }),
       });
       const result = await response.json();
@@ -16,11 +16,11 @@ export const useCategoryJoinCreation = () =>
     },
   });
 
-export const useCategoryJoinUpdate = () =>
+export const useFrequencyJoinUpdate = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
+    mutationFn: async (params: FrequencyJoin) => {
       const response = await http.put(
-        `/api/v1/category_joins/${params.todo_id}`,
+        `/api/v1/frequency_joins/${params.todo_id}`,
         {
           body: JSON.stringify({ ...params }),
         }
@@ -34,11 +34,11 @@ export const useCategoryJoinUpdate = () =>
     },
   });
 
-export const useCategoryJoinDelete = () =>
+export const useFrequencyJoinDelete = () =>
   useMutation({
-    mutationFn: async (params: CategoryJoin) => {
+    mutationFn: async (params: FrequencyJoin) => {
       const response = await http.delete(
-        `/api/v1/category_joins/${params.todo_id}`,
+        `/api/v1/frequency_joins/${params.todo_id}`,
         {
           body: JSON.stringify({ ...params }),
         }

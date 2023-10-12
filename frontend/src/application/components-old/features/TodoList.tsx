@@ -33,7 +33,7 @@ const TodoList = ({
   );
   const {mutate: updateTodo} = useTodosUpdate();
 
-  const handleOnChange = (event:React.SyntheticEvent, todo:Todo) => {
+  const handleOnChange = (event:MouseEvent, todo:Todo) => {
     let todoStatus = todo.status;
     if (todoStatus === "completed") {
       todo.status = null;
@@ -72,7 +72,7 @@ const TodoList = ({
                     id={todo.description}
                     type="checkbox"
                     className="cursor-pointer"
-                    onChange={() => handleOnChange(event:React.SyntheticEvent, todo:Todo)}
+                    onChange={() => handleOnChange(event, todo)}
                     checked={todo.status === "completed"}
                   />
                 </span>
